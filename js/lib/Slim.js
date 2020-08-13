@@ -94,6 +94,10 @@ export class Slim extends HTMLElement {
         return (camel) => camel.replace(/([A-Z])/g, "-$1").toLowerCase();
     }
 
+    static get capitalize() {
+        return (string) => string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     /**
      * Regular expression for testing if an expression describes property accessor
      * @returns {RegExp}
@@ -456,9 +460,12 @@ export class Slim extends HTMLElement {
      * @param {string} newValue
      */
     attributeChangedCallback(attr, oldValue, newValue) {
-        if (newValue !== oldValue && this.autoBoundAttributes.includes[attr]) {
+        if (newValue !== oldValue && this.autoBoundAttributes.includes(attr)) {
             const prop = Slim.dashToCamel(attr);
             this[prop] = newValue;
+            if (typeof this[`on${Slim.capitalize(prop)}Changed`] === "function") {
+                this[`on${Slim.capitalize(prop)}Changed`](newValue, oldValue, attr);
+            }
         }
     }
 
@@ -579,6 +586,7 @@ export class Slim extends HTMLElement {
         const observedAttributes = this.constructor.observedAttributes;
         if (observedAttributes) {
             observedAttributes.forEach((attr) => {
+                console.log(attr)
                 const pName = Slim.dashToCamel(attr);
                 this[pName] = this.getAttribute(attr);
             });

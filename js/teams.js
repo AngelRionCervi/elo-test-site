@@ -21,7 +21,7 @@ export default (players) => {
             const aliens = this.aliens.reduce((acc, player) => {
                 return [
                     ...acc,
-                    `${player.name} alien: ${player.alienElo}, marine: ${player.marineElo} alienDif: ${
+                    `${player.name}: alien: ${player.alienElo}, marine: ${player.marineElo} alienDif: ${
                         player.lastGameDif > 0 ? "+" + player.lastGameDif : player.lastGameDif
                     }`,
                 ];
@@ -29,7 +29,7 @@ export default (players) => {
             const marines = this.marines.reduce((acc, player) => {
                 return [
                     ...acc,
-                    `${player.name} alien: ${player.alienElo}, marine: ${player.marineElo} marineDif: ${
+                    `${player.name}: alien: ${player.alienElo}, marine: ${player.marineElo} marineDif: ${
                         player.lastGameDif > 0 ? "+" + player.lastGameDif : player.lastGameDif
                     }`,
                 ];

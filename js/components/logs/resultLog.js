@@ -5,8 +5,9 @@ const style = /* css */ `
 `;
 
 const html = /* html */ `
-<div class="result-log">
-    <textarea rows="20" class="team-result"></textarea>
+<div s:id="resultLogPanel" class="result-log-panel">
+    <p>{{teamName}}</p>
+    <textarea rows="12" class="team-result"></textarea>
 </div>
 `;
 
@@ -16,6 +17,12 @@ Slim.tag(
     class extends Slim {
         get useShadow() {
             return true;
+        }
+        teamNameChanged() {
+            console.log("ZHGEHGEEG")
+        }
+        updateLog(results) {
+            this.resultLogPanel.querySelector("textarea").value = results[this.teamName].join("\n");
         }
     }
 );
