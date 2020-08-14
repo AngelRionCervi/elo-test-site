@@ -1,15 +1,21 @@
 import bus from "../../bus.js";
 
 const style = /* css */ `
-.disabled {
-    opacity: 0.4;
-    pointer-events: none;
-}
+    .disabled {
+        opacity: 0.4;
+        pointer-events: none;
+    }
+    .interval-control-container {
+        width: 100%;
+    }
+    .interval-slider {
+        width: 70%;
+    }
 `;
 
 const html = /* html */ `
     <div s:id="intervalContainer" class="interval-control-container disabled">
-        <input type="range" min="10" max="2500" value="50" s:id="gameIntervalSlider">
+        <input class="interval-slider" type="range" min="5" max="2500" value="50" s:id="gameIntervalSlider">
         <p>{{currentSliderVal}}ms</p>
     </div>
 `;
@@ -42,8 +48,6 @@ Slim.tag(
                 this.currentSliderVal = parseInt(evt.target.value);
                 bus.emit("new-interval", this.currentSliderVal);
             });
-            console.log("render", this.intervalContainer);
-            
         }
     }
 );

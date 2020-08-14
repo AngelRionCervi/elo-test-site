@@ -18,10 +18,8 @@ Slim.tag(
         get useShadow() {
             return true;
         }
-        teamNameChanged() {
-            console.log("ZHGEHGEEG")
-        }
         updateLog(results) {
+            console.log(results)
             this.resultLogPanel.querySelector("textarea").value = results[this.teamName].join("\n");
         }
     }

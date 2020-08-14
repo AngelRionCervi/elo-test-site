@@ -1,5 +1,6 @@
 // tries to balance teams, not to implement
 export function findTeams(players) {
+    console.log(players)
     const len = 6;
     const start = 0;
     const result = [];

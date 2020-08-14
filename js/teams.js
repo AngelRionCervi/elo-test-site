@@ -9,8 +9,6 @@ export default (players) => {
         players,
         aliens: null,
         marines: null,
-        marineChange: null,
-        alienChange: null,
         lastWin: null,
         maxAlienElo: null,
         maxMarineElo: null,
@@ -50,9 +48,24 @@ export default (players) => {
                 gamesPlayed: this.gamesPlayed,
             };
         },
+        getResults() {
+            return { marines: this.marines, alien: this.aliens };
+        },
         createNewTeams() {
-            const shuffled = findTeams([...players]);
+            const shuffled = findTeams([...this.players]);
             Object.assign(this, shuffled);
+        },
+        resetTeams() {
+            this.players = [...this.players].reduce((acc, player) => {
+                return [...acc, { name: player.name, marineElo: 0, alienElo: 0 }];
+            }, []);
+            this.gamesPlayed = 0;
+            this.alienWins = 0;
+            this.marineWins = 0;
+            this.aliens = null;
+            this.marines = null;
+            this.lastWin = null;
+            this.createNewTeams();
         },
         updateRatings(teamWin) {
             // updates the marine or alien elo of the teams
